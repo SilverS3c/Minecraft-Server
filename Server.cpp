@@ -3,7 +3,9 @@
 #include<stdlib.h>
 #include<strings.h>
 #include<iostream>
+#ifndef SERVER_H
 #include "Server.h"
+#endif
 
 
 void error(char* str)
@@ -12,12 +14,15 @@ void error(char* str)
     exit(1);
 }
 
+
+bool Server::entity_lock = false;
+
 Server::Server(int port)
 {
     this->portno = port;
     
 }
-
+Entity* Server::entities = new Entity[Server::MAX_ENTITIES];
 int Server::run()
 {
     
@@ -57,5 +62,31 @@ int Server::run()
 
 void Server::addEntity(Entity e)
 {
-    
+    while (Server::entity_lock);
+    Server::entity_lock = true;
+    for (int i=0; i<Server::MAX_ENTITIES; i++)
+    {
+        if (Server::entities[i].getEntityID() == -1)
+        {
+            Server::entities[i] = e;
+            break;
+        }
+    }
+    Server::entity_lock = false;
+}
+
+Entity Server::getEntity(int id)
+{
+    while (Server::entity_lock);
+    Server::entity_lock = true;
+    for (int i = 0; i < Server::MAX_ENTITIES; i++)
+    {
+        if (Server::entities[i].getEntityID() == id)
+        {
+            Server::entity_lock = false;
+            return Server::entities[i];
+        }
+    }
+    Server::entity_lock = false;
+    return Entity(-1);
 }

@@ -9,10 +9,10 @@ class Packet
 {
     public:
         char OPCode;
-        char* build();
+        virtual char* build() = 0;
         Packet(char OPCode): OPCode{OPCode} {};
-        void Response(Client* c);
+        virtual void Response(Client* c) {}
         
 };
 
-Packet Parse(char* data, int len, Client* c);
+Packet* Parse(char* data, int len, Client* c);

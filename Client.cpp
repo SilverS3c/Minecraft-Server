@@ -46,8 +46,9 @@ void Client::loop()
         //wait for input
         int n = readBytes();
         //process
-        Packet packet = Parse(buff, n, this);
+        Packet* packet = Parse(buff, n, this);
+        if (!packet) continue;
         //response
-        packet.Response(this);
+        packet->Response(this);
     }
 }

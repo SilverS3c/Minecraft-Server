@@ -12,8 +12,8 @@ class Handshake: public Packet
         std::u16string respData;
         Handshake(char* data, int len, Client* c);
         Handshake(std::u16string str, Client* c);
-        void Response(Client* c);
-        char* build();
+        void Response(Client* c) override;
+        char* build() override;
 
 };
 

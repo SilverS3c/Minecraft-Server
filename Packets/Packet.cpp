@@ -9,16 +9,22 @@
 
 
 
-Packet Parse(char* data, int len, Client* c)
+Packet* Parse(char* data, int len, Client* c)
 {
     switch (data[0])
     {
     case 0x02:
-        return Handshake(data+1, len-1, c);
+    {
+        Handshake* h = new Handshake(data+1, len-1, c);
+        return h;
+    }
     case 0x01:
-        return LoginRequest(data+1, len-1, c);
+    {
+        LoginRequest* l = new LoginRequest(data+1, len-1, c);
+        return l;
+    }
     default:
         break;
     }
-    return Packet(0x0);
+    return 0;
 }

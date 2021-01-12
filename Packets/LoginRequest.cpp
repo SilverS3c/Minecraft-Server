@@ -9,6 +9,14 @@
 
 #include "Functions.h"
 
+#ifndef SERVER_H
+#include "Server.h"
+#endif
+#ifndef ENTITY_H
+#include "Entity/Entity.h"
+#endif
+#include "Config.h"
+
 LoginRequest::LoginRequest(char* data, int len, Client* c): Packet(0x01)
 {
     ProtocolVersion = be32toh(*(int*)data);
@@ -32,15 +40,48 @@ LoginRequest::LoginRequest(char* data, int len, Client* c): Packet(0x01)
 
 LoginRequest::LoginRequest(int EntId, std::u16string LevelType, int ServerMode, int Dimension, char Difficulty, unsigned char MaxPLayers): Packet(0x01)
 {
+    EntityID = EntId;
+    this->LevelType = LevelType;
+    this->ServerMode = ServerMode;
+    this->Dimension = Dimension;
+    this->Difficulty = Difficulty;
+    this->MaxPlayers = MaxPLayers;
+
 
 }
 
 char* LoginRequest::build()
 {
+    int tmp_len = LevelType.length()*2;
+    int l = 20 + tmp_len;
+    this->len=l;
+    char* resp = new char[this->len];
+    resp[0] = OPCode;
+    *(int*)(resp+1) = htobe32(EntityID);
+
+    *(short*)(resp+5) = (short)0;
+
+    *(short*)(resp+7) = htobe16((short)tmp_len);
+
+    
+    processUnicodes((char16_t*)(resp+9), (char*)LevelType.c_str(), LevelType.length());
+
+    
+    *(int*)(resp+9+tmp_len) = htobe32(ServerMode);
+    *(int*)(resp+13+tmp_len) = htobe32(Dimension);
+    *(resp+17+tmp_len) = Difficulty;
+    *(resp+18+tmp_len) = (char)0;
+    *(resp+19+tmp_len) = MaxPlayers;
+    return resp;
 
 }
 
 void LoginRequest::Response(Client* c)
 {
-
+    Entity e = Entity();
+    e.generateID();
+    Server::addEntity(e);
+    LoginRequest req(e.getEntityID(), Config::LevelType, Config::ServerMode, 0, Config::Difficulty, Config::MaxPlayers);
+    char* t = req.build();
+    c->writeBytes(t, req.len);
 }

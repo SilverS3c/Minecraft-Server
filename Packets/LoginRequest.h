@@ -13,6 +13,7 @@ class LoginRequest: public Packet
     public:
         LoginRequest(char* data, int len, Client* c);
         LoginRequest(int EntId, std::u16string LevelType, int ServerMode, int Dimension, char Difficulty, unsigned char MaxPLayers);
-        void Response(Client* c);
-        char* build();
+        void Response(Client* c) override;
+        char* build() override;
+        int len = 0;
 };
