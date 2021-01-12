@@ -23,6 +23,7 @@ Server::Server(int port)
     
 }
 Entity* Server::entities = new Entity[Server::MAX_ENTITIES];
+long Server::timeLastChecked = std::time(0);
 int Server::run()
 {
     
@@ -39,6 +40,7 @@ int Server::run()
     listen(sockfd, 5);
 
     clilen = sizeof(client_addr);
+    std::cout << "Listening..." << std::endl;
     while (true)
     {
         newsocket = accept(sockfd, (struct sockaddr *)&client_addr, (socklen_t *)&clilen);
@@ -89,4 +91,10 @@ Entity Server::getEntity(int id)
     }
     Server::entity_lock = false;
     return Entity(-1);
+}
+
+long Server::getTime()
+{
+    long diff = std::time(0)-Server::timeLastChecked;
+    return (diff*20)%24000;
 }

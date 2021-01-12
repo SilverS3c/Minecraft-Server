@@ -6,6 +6,9 @@
 #ifndef CLIENT_H
 #include "Client.h"
 #endif
+#ifndef PLAYERABILITIES_H
+#include "PlayerAbilities.h"
+#endif
 
 
 
@@ -22,6 +25,11 @@ Packet* Parse(char* data, int len, Client* c)
     {
         LoginRequest* l = new LoginRequest(data+1, len-1, c);
         return l;
+    }
+    case 0xca:
+    {
+        PlayerAbilities* p = new PlayerAbilities(data+1, len-1, c);
+        return p;
     }
     default:
         break;

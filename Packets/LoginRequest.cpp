@@ -16,6 +16,15 @@
 #include "Entity/Entity.h"
 #endif
 #include "Config.h"
+#ifndef SPAWNPOSITION_H
+#include "SpawnPosition.h"
+#endif
+#ifndef PLAYERABILITIES_H
+#include "PlayerAbilities.h"
+#endif
+#ifndef TIMEUPDATE_H
+#include "TimeUpdate.h"
+#endif
 
 LoginRequest::LoginRequest(char* data, int len, Client* c): Packet(0x01)
 {
@@ -61,7 +70,7 @@ char* LoginRequest::build()
 
     *(short*)(resp+5) = (short)0;
 
-    *(short*)(resp+7) = htobe16((short)tmp_len);
+    *(short*)(resp+7) = htobe16((short)tmp_len/2);
 
     
     processUnicodes((char16_t*)(resp+9), (char*)LevelType.c_str(), LevelType.length());
@@ -78,10 +87,22 @@ char* LoginRequest::build()
 
 void LoginRequest::Response(Client* c)
 {
+    std::cout << "S->C LoginRequest" << std::endl;
     Entity e = Entity();
     e.generateID();
     Server::addEntity(e);
     LoginRequest req(e.getEntityID(), Config::LevelType, Config::ServerMode, 0, Config::Difficulty, Config::MaxPlayers);
     char* t = req.build();
     c->writeBytes(t, req.len);
+
+    //Send spawn position
+    SpawnPosition s(Config::SpawnX, Config::SpawnY, Config::SpawnZ);
+    s.Send(c);
+
+    PlayerAbilities abilities(false, false, false, false);
+    abilities.Send(c);
+
+    TimeUpdate timeupdate(Server::getTime());
+    timeupdate.Send(c);
+
 }

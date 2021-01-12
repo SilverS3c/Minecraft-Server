@@ -10,6 +10,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 #endif
+#include <ctime>
 
 
 
@@ -34,4 +35,6 @@ class Server
         static Entity getEntity(int id);
         static void removeEntity(int id);
         static void removeEntity(Entity e);
+        static long getTime();
+        static long timeLastChecked;
 };

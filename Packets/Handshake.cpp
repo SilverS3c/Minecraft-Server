@@ -38,6 +38,7 @@ Handshake::Handshake(std::u16string str, Client* c): Packet(0x02)
 
 void Handshake::Response(Client* c)
 {
+    std::cout << "S->C Handshake" << std::endl;
     Handshake h(u"-", c);
     char* buf = h.build();
     c->writeBytes(buf, h.len);
