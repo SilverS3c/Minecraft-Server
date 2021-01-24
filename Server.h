@@ -11,6 +11,9 @@
 #define SERVER_H
 #endif
 #include <ctime>
+#ifndef WORLD_H
+#include "World/World.h"
+#endif
 
 
 
@@ -37,4 +40,6 @@ class Server
         static void removeEntity(Entity e);
         static long getTime();
         static long timeLastChecked;
+        static void loadSpawn();
+        static World* overworld;
 };

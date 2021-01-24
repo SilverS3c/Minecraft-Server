@@ -6,6 +6,7 @@
 #ifndef SERVER_H
 #include "Server.h"
 #endif
+#include "Config.h"
 
 
 void error(char* str)
@@ -24,9 +25,12 @@ Server::Server(int port)
 }
 Entity* Server::entities = new Entity[Server::MAX_ENTITIES];
 long Server::timeLastChecked = std::time(0);
+World* Server::overworld = new World();
 int Server::run()
 {
     
+    loadSpawn();
+
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     char a[] = "Cannot create socket";
     if (sockfd < 0) error(a);
@@ -62,6 +66,13 @@ int Server::run()
     return 0;
 }
 
+void Server::loadSpawn()
+{
+    overworld->LoadRegion(Config::SpawnX>>9, Config::SpawnZ>>9);
+    overworld->LoadRegion(Config::SpawnX>>9-1, Config::SpawnZ>>9);
+    overworld->LoadRegion(Config::SpawnX>>9-1, Config::SpawnZ>>9-1);
+    overworld->LoadRegion(Config::SpawnX>>9, Config::SpawnZ>>9-1);
+}
 void Server::addEntity(Entity e)
 {
     while (Server::entity_lock);

@@ -3,6 +3,9 @@
 class Block
 {
     public:
-        char id, data;
+        char id=0, data=0;
         Location GetLocation();
+        Block(char id, char data) {this->id = id; this->data = data; }
+        Block(char id) {this->id = id; }
+        Block();
 };

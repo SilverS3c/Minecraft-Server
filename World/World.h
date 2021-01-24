@@ -20,5 +20,6 @@ class World
         void SetRegion(int x, int z, Region region);
         void SetChunk(Location loc, Chunk chunk) {SetChunk(loc.x, loc.z, chunk); }
         void SetChunk(int x, int z, Chunk chunk);
+        void LoadRegion(int x, int z);
     
 };

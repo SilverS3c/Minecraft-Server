@@ -14,3 +14,18 @@ void Region::SetBlock(int x, int y, int z, Block block)
 {
     *GetBlock(x,y,z) = block;
 }
+
+void Region::SetChunk(int x, int z, Chunk chunk)
+{
+    *GetChunk(x,z) = chunk;
+}
+
+void Region::Load()
+{
+
+}
+
+void Region::unLoad()
+{
+
+}
