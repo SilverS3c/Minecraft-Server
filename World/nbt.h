@@ -1,10 +1,12 @@
-#ifndef WORLD_H
+#ifndef NBT_H
+#define NBT_H
 #include "World.h"
-#endif
 #include <string>
 
 class nbt
 {
     public:
-        Region* LoadRegionFile(std::string filename);
+        nbt() {}
+        Region* LoadRegionFile(std::string filename) { return 0; } // test
 };
+#endif

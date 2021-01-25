@@ -1,6 +1,6 @@
-#ifndef PACKET_H
+#ifndef LOGINREQUEST_H
+#define LOGINREQUEST_H
 #include "Packet.h"
-#endif
 
 class LoginRequest: public Packet
 {
@@ -11,9 +11,11 @@ class LoginRequest: public Packet
     unsigned char MaxPlayers=0;
     std::u16string username;
     public:
-        LoginRequest(char* data, int len, Client* c);
+        LoginRequest(unsigned char* data, int len, Client* c);
         LoginRequest(int EntId, std::u16string LevelType, int ServerMode, int Dimension, char Difficulty, unsigned char MaxPLayers);
         void Response(Client* c) override;
         char* build() override;
         int len = 0;
 };
+
+#endif

@@ -1,6 +1,4 @@
-#ifndef WORLD_H
 #include "World.h"
-#endif
 #include <iostream>
 #include <fstream>
 #include "../Config.h"

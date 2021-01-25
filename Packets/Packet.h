@@ -1,9 +1,7 @@
 #ifndef PACKET_H
 #define PACKET_H
-#endif
-#ifndef CLIENT_H
+
 #include "Client.h"
-#endif
 
 class Packet
 {
@@ -15,4 +13,6 @@ class Packet
         
 };
 
-Packet* Parse(char* data, int len, Client* c);
+Packet* Parse(unsigned char* data, int len, Client* c);
+
+#endif

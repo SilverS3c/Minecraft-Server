@@ -1,4 +1,4 @@
-#include <PlayerAbilities.h>
+#include "PlayerAbilities.h"
 
 char* PlayerAbilities::build()
 {
@@ -12,7 +12,7 @@ char* PlayerAbilities::build()
     return tmp;
 }
 
-PlayerAbilities::PlayerAbilities(char* data, int len, Client* c): Packet(0xca)
+PlayerAbilities::PlayerAbilities(unsigned char* data, int len, Client* c): Packet(0xca)
 {
 
 }

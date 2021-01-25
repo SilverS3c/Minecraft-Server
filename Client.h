@@ -1,11 +1,11 @@
+#ifndef CLIENT_H
+#define CLIENT_H
 #include<string>
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<thread>
-#ifndef CLIENT_H
-#define CLIENT_H
-#endif
+
 
 class Client
 {
@@ -16,7 +16,7 @@ class Client
 
     public:
         static const int BUFF_SIZE = 2048;
-    char buff[BUFF_SIZE];
+    unsigned char buff[BUFF_SIZE];
     
 
     public:
@@ -32,3 +32,4 @@ class Client
 
 
 };
+#endif

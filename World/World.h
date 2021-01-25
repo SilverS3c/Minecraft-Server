@@ -1,6 +1,5 @@
 #ifndef WORLD_H
 #define WORLD_H
-#endif
 #include "Region.h"
 #include <vector>
 
@@ -23,3 +22,4 @@ class World
         void LoadRegion(int x, int z);
     
 };
+#endif

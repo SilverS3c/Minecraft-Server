@@ -1,9 +1,9 @@
-#ifndef PACKET_H
-#include "Packet.h"
-#endif
+
 #ifndef TIMEUPDATE_H
 #define TIMEUPDATE_H
-#endif
+
+#include "Packet.h"
+
 
 class TimeUpdate: public Packet
 {
@@ -14,3 +14,4 @@ class TimeUpdate: public Packet
         char* build() override;
         void Send(Client* c);
 };
+#endif

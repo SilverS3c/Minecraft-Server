@@ -1,3 +1,5 @@
+#ifndef CONFIG_H
+#define CONFIG_H
 #include <string>
 
 
@@ -11,3 +13,4 @@ class Config
         static const int SpawnX = 0, SpawnY = 50, SpawnZ = 0;
         static std::string WorldName;
 };
+#endif

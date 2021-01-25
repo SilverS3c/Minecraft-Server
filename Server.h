@@ -1,19 +1,13 @@
+#ifndef SERVER_H
+#define SERVER_H
+
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
-#ifndef CLIENT_H
 #include "Client.h"
-#endif
-#ifndef ENTITY_H
 #include "Entity/Entity.h"
-#endif
-#ifndef SERVER_H
-#define SERVER_H
-#endif
 #include <ctime>
-#ifndef WORLD_H
 #include "World/World.h"
-#endif
 
 
 
@@ -43,3 +37,4 @@ class Server
         static void loadSpawn();
         static World* overworld;
 };
+#endif

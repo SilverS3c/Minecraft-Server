@@ -1,6 +1,4 @@
-#ifndef TIMEUPDATE_H
 #include "TimeUpdate.h"
-#endif
 
 char* TimeUpdate::build()
 {

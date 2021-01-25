@@ -1,9 +1,7 @@
-#ifndef PACKET_H
-#include "Packet.h"
-#endif
 #ifndef SPAWNPOSITION_H
 #define SPAWNPOSITION_H
-#endif
+
+#include "Packet.h"
 
 class SpawnPosition: public  Packet
 {
@@ -14,3 +12,5 @@ class SpawnPosition: public  Packet
         void Send(Client* c);
         char* build() override;
 };
+
+#endif

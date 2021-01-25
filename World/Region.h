@@ -1,9 +1,13 @@
+
+
+#ifndef REGION_H
+#define REGION_H
+
 #include "Chunk.h"
-
-
 class Region
 {
     public:
+        Region() {}
         int x=0, z=0;
         bool isLoaded = false;
         Location location;
@@ -16,3 +20,5 @@ class Region
         void Load();
         void unLoad();
 };
+
+#endif

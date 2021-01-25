@@ -1,3 +1,6 @@
+#ifndef MATERIAL_H
+#define MATERIAL_H
+
 class Material
 {
     public:
@@ -7,3 +10,4 @@ class Material
         static const char DIRT = 3;
         static const char BEDROCK = 7;
 };
+#endif

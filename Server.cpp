@@ -3,9 +3,7 @@
 #include<stdlib.h>
 #include<strings.h>
 #include<iostream>
-#ifndef SERVER_H
 #include "Server.h"
-#endif
 #include "Config.h"
 
 

@@ -1,6 +1,4 @@
-#ifndef ENTITY_H
 #include "Entity/Entity.h"
-#endif
 #include <cstdlib>
 #include "../Server.h"
 

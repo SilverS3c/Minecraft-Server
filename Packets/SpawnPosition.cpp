@@ -1,6 +1,4 @@
-#ifndef SPAWNPOSITION_H
 #include "SpawnPosition.h"
-#endif
 
 char* SpawnPosition::build()
 {

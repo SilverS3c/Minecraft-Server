@@ -9,24 +9,14 @@
 
 #include "Functions.h"
 
-#ifndef SERVER_H
 #include "Server.h"
-#endif
-#ifndef ENTITY_H
 #include "Entity/Entity.h"
-#endif
 #include "Config.h"
-#ifndef SPAWNPOSITION_H
 #include "SpawnPosition.h"
-#endif
-#ifndef PLAYERABILITIES_H
 #include "PlayerAbilities.h"
-#endif
-#ifndef TIMEUPDATE_H
 #include "TimeUpdate.h"
-#endif
 
-LoginRequest::LoginRequest(char* data, int len, Client* c): Packet(0x01)
+LoginRequest::LoginRequest(unsigned char* data, int len, Client* c): Packet(0x01)
 {
     ProtocolVersion = be32toh(*(int*)data);
     data += 4;
@@ -73,7 +63,7 @@ char* LoginRequest::build()
     *(short*)(resp+7) = htobe16((short)tmp_len/2);
 
     
-    processUnicodes((char16_t*)(resp+9), (char*)LevelType.c_str(), LevelType.length());
+    processUnicodes((char16_t*)(resp+9), (unsigned char*)LevelType.c_str(), LevelType.length());
 
     
     *(int*)(resp+9+tmp_len) = htobe32(ServerMode);

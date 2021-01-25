@@ -43,7 +43,7 @@ unsigned short getShortRevEndian(unsigned short* data)
     return ntohs(*(unsigned short *)(data));
 }
 
-void processUnicodes(char16_t* dst, char* data, int len)
+void processUnicodes(char16_t* dst, unsigned char* data, int len)
 {
     memcpy(dst, data, len*2);
     for (int i=0; i<len; i++)

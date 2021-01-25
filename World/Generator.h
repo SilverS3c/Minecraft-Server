@@ -1,9 +1,10 @@
-#ifndef WORLD_H
+#ifndef GENERATOR_H
+#define GENERATOR_H
 #include "World.h"
-#endif
 
 class Generator
 {
     public:
         Chunk* GenerateChunk();
 };
+#endif

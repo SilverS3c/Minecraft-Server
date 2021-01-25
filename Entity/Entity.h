@@ -1,6 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-#endif
+
 
 class Entity
 {
@@ -13,3 +13,4 @@ class Entity
         void generateID();
 
 };
+#endif

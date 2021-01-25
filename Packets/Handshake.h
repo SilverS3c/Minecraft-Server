@@ -1,6 +1,6 @@
-#ifndef PACKET_H
+#ifndef HANDSHAKE_H
+#define HANDSHAKE_H
 #include "Packet.h"
-#endif
 #include<string>
 
 class Handshake: public Packet
@@ -10,10 +10,11 @@ class Handshake: public Packet
     public:
         int len = 0;
         std::u16string respData;
-        Handshake(char* data, int len, Client* c);
+        Handshake(unsigned char* data, int len, Client* c);
         Handshake(std::u16string str, Client* c);
         void Response(Client* c) override;
         char* build() override;
 
 };
 
+#endif

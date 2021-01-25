@@ -3,7 +3,7 @@
 #include<string.h>
 #include<iostream>
 
-Handshake::Handshake(char* data, int len, Client* c): Packet(0x02)
+Handshake::Handshake(unsigned char* data, int len, Client* c): Packet(0x02)
 {
     unsigned short strsize = getShortRevEndian((unsigned short*)data);
     data += 2;
@@ -26,7 +26,7 @@ char* Handshake::build()
     rlen = getShortRevEndian(&rlen);
     memcpy(resp+1, &rlen, 2);   // set str len
     char16_t tmp[respData.length()];
-    processUnicodes(tmp, (char*)respData.c_str(), respData.length());
+    processUnicodes(tmp, (unsigned char*)respData.c_str(), respData.length());
     memcpy(resp+3, tmp, respData.length()*2);   //set str
     return resp;
 }
