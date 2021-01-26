@@ -15,6 +15,9 @@
 #include "SpawnPosition.h"
 #include "PlayerAbilities.h"
 #include "TimeUpdate.h"
+#include "ChunkAllocation.h"
+#include "ChunkData.h"
+#include "Keepalive.h"
 
 LoginRequest::LoginRequest(unsigned char* data, int len, Client* c): Packet(0x01)
 {
@@ -94,5 +97,21 @@ void LoginRequest::Response(Client* c)
 
     TimeUpdate timeupdate(Server::getTime());
     timeupdate.Send(c);
+
+    Keepalive keepalive;
+    keepalive.Send(c);
+
+    for (int z=Config::SpawnZ-(5*16);z<Config::SpawnZ+(5*16); z+=16)
+    {
+        for (int x=Config::SpawnX-(5*16);x<Config::SpawnX+(5*16); x+=16)
+        {
+            Server::overworld->LoadRegion(x>>9,z>>9);
+            ChunkAllocation alloc(x,z,true);
+            alloc.Send(c);
+            ChunkData data(x,z, Server::overworld);
+            data.Send(c);
+            std::cout << "Sent out Chunk data to " << x << " " << z << std::endl;
+        }
+    }
 
 }

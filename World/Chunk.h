@@ -11,8 +11,8 @@ class Chunk
     public:
         bool isLoaded = false;
         Block* blocks = new Block[16*256*16];
-        Location location;
-        Region* region;
+        //Location location;
+        //Region* region;
         Chunk() {}
         void Load();
         void unLoad();

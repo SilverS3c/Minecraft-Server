@@ -1,4 +1,5 @@
 #include "Region.h"
+#include <cstdlib>
 
 Block* Region::GetBlock(int x, int y, int z)
 {
@@ -7,7 +8,7 @@ Block* Region::GetBlock(int x, int y, int z)
 
 Chunk* Region::GetChunk(int x, int z)
 {
-    return &chunks[(z*32+x)];
+    return &chunks[(z*32+(x))];
 }
 
 void Region::SetBlock(int x, int y, int z, Block block)

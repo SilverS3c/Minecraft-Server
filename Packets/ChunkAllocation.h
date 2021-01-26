@@ -1,3 +1,6 @@
+#ifndef CHUNKALLOCATION_H
+#define CHUNKALLOCATION_H
+
 #include "Packet.h"
 
 class ChunkAllocation: public Packet
@@ -10,3 +13,4 @@ class ChunkAllocation: public Packet
         char* build() override;
         void Send(Client* c);
 };
+#endif

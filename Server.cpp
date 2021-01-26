@@ -66,10 +66,10 @@ int Server::run()
 
 void Server::loadSpawn()
 {
-    overworld->LoadRegion(Config::SpawnX>>9, Config::SpawnZ>>9);
-    overworld->LoadRegion(Config::SpawnX>>9-1, Config::SpawnZ>>9);
-    overworld->LoadRegion(Config::SpawnX>>9-1, Config::SpawnZ>>9-1);
-    overworld->LoadRegion(Config::SpawnX>>9, Config::SpawnZ>>9-1);
+    /*Server::overworld->LoadRegion(Config::SpawnX>>9, Config::SpawnZ>>9);
+    Server::overworld->LoadRegion(Config::SpawnX>>9-1, Config::SpawnZ>>9);
+    Server::overworld->LoadRegion(Config::SpawnX>>9-1, Config::SpawnZ>>9-1);
+    Server::overworld->LoadRegion(Config::SpawnX>>9, Config::SpawnZ>>9-1); */
 }
 void Server::addEntity(Entity e)
 {
