@@ -18,6 +18,8 @@
 #include "ChunkAllocation.h"
 #include "ChunkData.h"
 #include "Keepalive.h"
+#include "PlayerPositionandLook.h"
+#include "SetWindowItems.h"
 
 LoginRequest::LoginRequest(unsigned char* data, int len, Client* c): Packet(0x01)
 {
@@ -81,8 +83,9 @@ char* LoginRequest::build()
 void LoginRequest::Response(Client* c)
 {
     std::cout << "S->C LoginRequest" << std::endl;
-    Entity e = Entity();
+    Player e = Player();
     e.generateID();
+    c->player = e;
     Server::addEntity(e);
     LoginRequest req(e.getEntityID(), Config::LevelType, Config::ServerMode, 0, Config::Difficulty, Config::MaxPlayers);
     char* t = req.build();
@@ -101,17 +104,26 @@ void LoginRequest::Response(Client* c)
     Keepalive keepalive;
     keepalive.Send(c);
 
+    SetWindowItems setWindowItems(0, Inventory::SlotCount, c->player.inventory.slots);
+    setWindowItems.Send(c);
+
     for (int z=Config::SpawnZ-(5*16);z<Config::SpawnZ+(5*16); z+=16)
     {
         for (int x=Config::SpawnX-(5*16);x<Config::SpawnX+(5*16); x+=16)
         {
             Server::overworld->LoadRegion(x>>9,z>>9);
-            ChunkAllocation alloc(x,z,true);
+            ChunkAllocation alloc(x/16,z/16,true);
             alloc.Send(c);
-            ChunkData data(x,z, Server::overworld);
-            data.Send(c);
+            /*ChunkData data(x,z, Server::overworld);
+            data.Send(c);*/
             std::cout << "Sent out Chunk data to " << x << " " << z << std::endl;
         }
     }
+
+    PlayerPositionandLook ppan;
+    ppan.copyFromPlayer(&(c->player));
+    ppan.Send(c);
+
+    
 
 }

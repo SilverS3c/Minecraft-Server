@@ -53,7 +53,7 @@ void World::LoadRegion(int x, int z) // Needs optimization
     {
         if (GetRegion(x,z)->isLoaded)
         {
-            std::cout << "\033[33m" << "Region "<<std::to_string(x)<<" "<<std::to_string(z)<<" is already loaded!" << "\033[0m"<<std::endl;
+            //std::cout << "\033[33m" << "Region "<<std::to_string(x)<<" "<<std::to_string(z)<<" is already loaded!" << "\033[0m"<<std::endl;
             return;
         }
     }
@@ -65,7 +65,7 @@ void World::LoadRegion(int x, int z) // Needs optimization
         // generation
         Generator gen;
         Region newRegion;
-        std::cout << "Generating region..." << std::endl;
+        //std::cout << "Generating region..." << std::endl;
         auto start = std::chrono::high_resolution_clock::now();
         for (int z=0; z<32;z++)
         {
@@ -80,7 +80,7 @@ void World::LoadRegion(int x, int z) // Needs optimization
         newRegion.isLoaded = true;
         AddRegion(x,z,newRegion);
         std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now()-start;
-        std::cout << "Ended in: " << diff.count() << " s" << std::endl;
+        //std::cout << "Ended in: " << diff.count() << " s" << std::endl;
     }
     else
     {

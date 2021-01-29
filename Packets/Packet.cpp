@@ -3,6 +3,7 @@
 #include "LoginRequest.h"
 #include "Client.h"
 #include "PlayerAbilities.h"
+#include "PlayerPositionandLook.h"
 
 
 
@@ -24,6 +25,11 @@ Packet* Parse(unsigned char* data, int len, Client* c)
     {
         PlayerAbilities* p = new PlayerAbilities(data+1, len-1, c);
         return p;
+    }
+    case 0x0d:
+    {
+        PlayerPositionandLook* ppal = new PlayerPositionandLook(data+1, len-1, c);
+        return ppal;
     }
     default:
         break;

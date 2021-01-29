@@ -65,3 +65,29 @@ int strlen16(char16_t* str)
     }
     return counter;
 }
+
+double htobeDouble(double* num)
+{
+    int64_t tmp = htobe64(le64toh(*(int64_t*)num));
+    return *(double*)&tmp;
+}
+
+double betohDouble(double* num)
+{
+    int64_t tmp = be64toh(*(int64_t*)num);
+    return *(double*)&tmp;
+}
+
+float ReverseFloat(float num)
+{
+    float retval;
+    char* toConvert = (char*)&num;
+    char* fin = (char*)&retval;
+
+    fin[0] = toConvert[3];
+    fin[1] = toConvert[2];
+    fin[2] = toConvert[1];
+    fin[3] = toConvert[0];
+
+    return retval;
+}

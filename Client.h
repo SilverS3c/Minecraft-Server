@@ -5,6 +5,7 @@
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<thread>
+#include "Entity/Player.h"
 
 
 class Client
@@ -13,6 +14,7 @@ class Client
     struct sockaddr_in client_addr;
     std::u16string username;
     std::string uuid;
+    
 
     public:
         static const int BUFF_SIZE = 2048;
@@ -20,6 +22,8 @@ class Client
     
 
     public:
+        time_t last_keepalive = 0;
+        Player player;
         std::thread cthread;
         int readBytes();
         int writeBytes(char* buf, int len);
